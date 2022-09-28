@@ -16,8 +16,8 @@ int answer;
 int main() {
 	ifstream fR;
 	ofstream fA;
-	string nameR ="D:\Work\WWW\Server\REQUEST.bin";
-	string nameA ="D:\Work\WWW\Server\ANSWER.bin";
+	string nameR = "REQUEST.bin";
+	string nameA = "ANSWER.bin";
 
 	cout << "server is working" << endl;
 
@@ -32,29 +32,29 @@ int main() {
 		fR.seekg(0, ios::end);
 		while (size_pred >= fR.tellg()) {
 			Sleep(100);
-			fR.seekg(0,ios::end);
+			fR.seekg(0, ios::end);
 		}
 		fR.seekg(size_pred, ios::beg);
 		fR.read((char*)&B, sizeof(B));
 		size_pred = fR.tellg();
 		fR.close();
-		 
+
 		answer = 60000;
 		for (int i = 0; i < 4; i++)
 		{
-			int Cl = B.val[i];
-			switch (Cl)
+			switch (B.val[i])
 			{
-			case 5: if (answer%10000>=5) answer = 50000;
-				
+			case 5: if (answer >= 50000) answer = 50000;
+
 				break;
-			case 4: if (answer % 10000 >= 4) answer = 40000;
-				
+			case 4: if (answer >= 40000) answer = 40000;
+
 				break;
-			case 3: if (answer % 10000 >= 3) answer = 30000;
-				
+			case 3: if (answer >= 30000) answer = 30000;
+
 				break;
-			case 2: if (answer % 10000 >= 2)
+			case 2: if (answer > 22000) answer = 20000;
+				if (answer >= 20000)
 				answer = answer + pow(10, i);
 				break;
 			}

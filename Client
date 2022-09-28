@@ -17,8 +17,8 @@ int answer;
 int pred_size;
 
 int main() {
-	string nameR = "D:\Work\WWW\Server\REQUEST.bin";
-	string nameA = "D:\Work\WWW\Server\ANSWER.bin";
+	string nameR = "REQUEST.bin";
+	string nameA = "ANSWER.bin";
 	ofstream f_REQ;
 	ifstream f_ANS;
 	predmet[0] = "OOP";
@@ -37,7 +37,7 @@ int main() {
 		f_REQ.open(nameR, ios::app | ios::binary);
 		f_REQ.write((char*)&A, sizeof(A));
 		f_REQ.close();
-		
+
 
 		f_ANS.open(nameA, ios::binary);
 		f_ANS.seekg(0, ios::end);
@@ -50,17 +50,17 @@ int main() {
 		f_ANS.seekg(pred_size, ios::beg);
 		f_ANS.read((char*)&answer, sizeof(answer));
 		f_ANS.close();
-
-		switch (answer%10000)
+		cout << answer << endl;
+		switch (answer)
 		{
-		case 2: cout << "No scholarship" << endl;
-			for (int i = 0; i < 4; i++) if (answer%(int)pow(10,i)) cout << predmet[i] << "not counted." << endl;
+		case 30000: cout << "No scholarship" << endl;
 			break;
-		case 3: cout << "No scholarship" << endl;
+		case 40000: cout << "Scholarship = 1800" << endl;
 			break;
-		case 4: cout << "Scholarship = 1800" << endl;
+		case 50000: cout << "Scholarship = 2500" << endl;
 			break;
-		case 5: cout << "No scholarship = 2500" << endl;
+		default: cout << "No scholarship" << endl;
+			for (int i = 0; i < 4; i++) if (answer % (int)pow(10, i) == 1) cout << predmet[i] << " not counted." << endl;
 			break;
 		}
 	}

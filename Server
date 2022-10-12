@@ -6,7 +6,8 @@ using namespace std;
 
 struct Student
 {
-	char Name;
+	string Client;
+	string Name;
 	int val[4];
 }B;
 
@@ -17,8 +18,6 @@ int main() {
 	ifstream fR;
 	ofstream fA;
 	string nameR = "REQUEST.bin";
-	string nameA = "ANSWER.bin";
-
 	cout << "server is working" << endl;
 
 	fR.open(nameR, ios::binary);
@@ -31,7 +30,6 @@ int main() {
 		fR.open(nameR, ios::binary);
 		fR.seekg(0, ios::end);
 		while (size_pred >= fR.tellg()) {
-			Sleep(100);
 			fR.seekg(0, ios::end);
 		}
 		fR.seekg(size_pred, ios::beg);
@@ -55,11 +53,11 @@ int main() {
 				break;
 			case 2: if (answer > 22000) answer = 20000;
 				if (answer >= 20000)
-				answer = answer + pow(10, i);
+					answer = answer + pow(10, i);
 				break;
 			}
 		}
-		fA.open(nameA, ios::binary | ios::app);
+		fA.open(B.Client + ".bin", ios::binary | ios::app);
 		fA.write((char*)&answer, sizeof(answer));
 		fA.close();
 	}

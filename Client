@@ -9,7 +9,8 @@ string* predmet = new string[4];
 
 struct Student
 {
-	char Name;
+	string Client;
+	string Name;
 	int val[4];
 }A;
 
@@ -18,14 +19,15 @@ int pred_size;
 
 int main() {
 	string nameR = "REQUEST.bin";
-	string nameA = "ANSWER.bin";
 	ofstream f_REQ;
 	ifstream f_ANS;
+	cout << "Client: " << endl;
+	cin >> A.Client;
+	string nameA = A.Client + ".bin";
 	predmet[0] = "OOP";
 	predmet[1] = "Physic";
 	predmet[2] = "Math";
 	predmet[3] = "DIf";
-
 	while (true)
 	{
 		cout << "Enter Name: " << endl;
@@ -44,7 +46,6 @@ int main() {
 		pred_size = f_ANS.tellg();
 		while (pred_size >= f_ANS.tellg())
 		{
-			Sleep(100);
 			f_ANS.seekg(0, ios::end);
 		}
 		f_ANS.seekg(pred_size, ios::beg);
@@ -60,9 +61,9 @@ int main() {
 		case 50000: cout << "Scholarship = 2500" << endl;
 			break;
 		default: cout << "No scholarship" << endl;
-			if(answer%10==1) cout << "OOP" << endl;
-			if (answer % 100/10 == 1) cout << "Physic" << endl;
-			if(answer%1000/100==1) cout << "Math" << endl;
+			if (answer % 10 == 1) cout << "OOP" << endl;
+			if (answer % 100 / 10 == 1) cout << "Physic" << endl;
+			if (answer % 1000 / 100 == 1) cout << "Math" << endl;
 			if (answer % 10000 / 1000 == 1) cout << "Dif" << endl;
 			break;
 		}

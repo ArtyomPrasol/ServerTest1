@@ -36,18 +36,25 @@ int main() {
 			cout << predmet[i] << " grade: " << endl;
 			cin >> A.val[i];
 		}
+
 		f_REQ.open(nameR, ios::app | ios::binary);
 		f_REQ.write((char*)&A, sizeof(A));
 		f_REQ.close();
 
-
+		cout << "Wait..." << endl;
 		f_ANS.open(nameA, ios::binary);
-		f_ANS.seekg(0, ios::end);
-		pred_size = f_ANS.tellg();
-		while (pred_size >= f_ANS.tellg())
+		while (!f_ANS.is_open())
 		{
+			f_ANS.open(nameA, ios::binary);
+		}
+		f_ANS.seekg(0, ios::end);
+		pred_size = f_ANS.tellg(); 
+		while (pred_size >= (int)f_ANS.tellg())
+		{
+			Sleep(100);
 			f_ANS.seekg(0, ios::end);
 		}
+		
 		f_ANS.seekg(pred_size, ios::beg);
 		f_ANS.read((char*)&answer, sizeof(answer));
 		f_ANS.close();
